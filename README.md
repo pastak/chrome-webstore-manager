@@ -35,5 +35,5 @@ Only this command, your items is under draft. So you should publish item. I writ
 
 ### Update item
 
-- `$ chrome-webstore-manager publish ITEM_ID /path/to/your_extension.zip`
+- `$ chrome-webstore-manager update ITEM_ID /path/to/your_extension.zip`
   - `ITEM_ID`: chrome-web-store-item-id
