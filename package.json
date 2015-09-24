@@ -7,7 +7,7 @@
     "test": "standard ./**/*js"
   },
   "bin": {
-    "chrome-webstore-publish": "./index.js"
+    "chrome-webstore-manager": "./index.js"
   },
   "repository": {
     "type": "git",
