@@ -20,6 +20,15 @@
   - You can set `access_token` as environment value named `WEBSTORE_TOKEN`
     - If you use it on \*CI, it is useful `export WEBSTORE_TOKEN=[YOUR_ACCESS_TOKEN]`
 
+### :warning: `token` vs `refresh_token`
+
+- `token`
+  - Lifetime is **short**
+  - It requires new token per request and you should authorize via browser.
+- `refrash_token`
+  - Lifetime is **very long**
+  - You should set it if it works with CI.
+
 ### Create new item
 
 - `$ chrome-webstore-manager insert /path/to/your_extension.zip`
