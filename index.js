@@ -70,7 +70,8 @@ program
     }).then(function (data) {
       var json = JSON.parse(data)
       if (json.itemError) {
-        return console.error(json.itemError)
+        console.error(json.itemError)
+        return process.exit(1)
       }
       console.log(json.id)
     })
@@ -94,7 +95,8 @@ program
     }).then(function (data) {
       var json = JSON.parse(data)
       if (json.itemError) {
-        return console.error(json.itemError)
+        console.error(json.itemError)
+        return process.exit(1)
       }
       console.log(json.id)
     })
@@ -117,7 +119,8 @@ program
     }).then(function (data) {
       var json = JSON.parse(data)
       if (json.itemError) {
-        return console.error(json.itemError)
+        console.error(json.itemError)
+        return process.exit(1)
       }
       console.log(json.id)
     })
