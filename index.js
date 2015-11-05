@@ -19,7 +19,7 @@ var getAccessToken = function (cid, cs, code) {
     .then(function (data) {
       var json = JSON.parse(data)
       console.log('Your token: ' + json.access_token)
-      console.log('Your refresh_token: ' + json.access_token)
+      console.log('Your refresh_token: ' + json.refresh_token)
       process.exit()
     })
 }
