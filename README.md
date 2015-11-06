@@ -1,5 +1,9 @@
 # chrome-webstore-manager
 
+[![](https://nodei.co/npm-dl/chrome-webstore-manager.png?months=3)](https://www.npmjs.com/package/chrome-webstore-manager)
+
+[![](https://nodei.co/npm/chrome-webstore-manager.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/chrome-webstore-manager)
+
 ## INSTALL
 
 `$ npm install -g chrome-webstore-manager`
