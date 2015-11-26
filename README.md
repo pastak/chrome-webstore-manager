@@ -40,7 +40,7 @@
 
 **Usage Example**
 
-`$ WEBSTORE_REFRESH_TOKEN=$(chrome-webstore-manager refresh_token ...) chrome-webstore-manager update ITEM_ID extension.zip`
+`$ WEBSTORE_TOKEN=$(chrome-webstore-manager refresh_token ...) chrome-webstore-manager update ITEM_ID extension.zip`
 
 ### Create new item
 
