@@ -125,6 +125,34 @@ program
       console.log(json.id)
     })
   })
+program
+  .command('refresh_token')
+  .description('Get token for the first time')
+  .option('--client_id [Client_ID]', 'Your Client ID')
+  .option('--client_secret [Client_Secret]', 'Your Client Secret')
+  .option('--refresh_token [Refresh_Token]', 'Your Refresh Token')
+  .action(function (options) {
+    const cid = options.client_id
+    const cs = options.client_secret
+    if (!(cid && cs)) {
+      console.error('Require Client ID and Client Secret')
+      process.exit()
+    }
+    if (!(process.env.WEBSTORE_REFRESH_TOKEN || options.refresh_token)) {
+      console.error('Require refresh_token')
+      process.exit()
+    }
+    var refreshToken = options.refresh_token || process.env.WEBSTORE_REFRESH_TOKEN
+    request.post('https://www.googleapis.com/oauth2/v3/token', {form: {
+      client_id: cid,
+      client_secret: cs,
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken
+    }}).then(function (data) {
+      var json = JSON.parse(data)
+      console.log(json.access_token)
+    })
+  })
 
 program.parse(process.argv)
 

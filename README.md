@@ -24,7 +24,7 @@
   - You can set `access_token` as environment value named `WEBSTORE_TOKEN`
     - If you use it on \*CI, it is useful `export WEBSTORE_TOKEN=[YOUR_ACCESS_TOKEN]`
 
-### :warning: `token` vs `refresh_token`
+## :warning: `token` vs `refresh_token`
 
 - `token`
   - Lifetime is **short**
@@ -32,6 +32,15 @@
 - `refrash_token`
   - Lifetime is **very long**
   - You should set it if it works with CI.
+
+### Get access token using refresh token
+
+- You get new access token with `$ chrome-webstore-manager refresh_token --client_id [YOUR_CLIENT_ID] --client_secret [YOUR_CLIENT_SECRET] --refresh_token [YOUR_REFRESH_TOKEN]`
+  - You can use environment variable `WEBSTORE_REFRESH_TOKEN` instead of `refresh_token`
+
+**Usage Example**
+
+`$ WEBSTORE_REFRESH_TOKEN=$(chrome-webstore-manager refresh_token ...) chrome-webstore-manager update ITEM_ID extension.zip`
 
 ### Create new item
 
