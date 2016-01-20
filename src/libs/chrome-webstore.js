@@ -1,18 +1,21 @@
 const request = require('request-promise')
 module.exports = class ChromeWebStore {
-  getCodeUrl (cid, redirectUrl) {
-    redirectUrl = redirectUrl || 'urn:ietf:wg:oauth:2.0:oob'
-    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + cid + '&redirect_uri=' + redirectUrl
+  constructor (cid, cs, redirectUrl) {
+    this.cid = cid
+    this.cs = cs
+    this.redirectUrl = redirectUrl || 'urn:ietf:wg:oauth:2.0:oob'
   }
-  getAccessToken (cid, cs, code) {
-    if (!(cid && cs && code)) reject(new Error('You should set 3 parameters'))
+  getCodeUrl () {
+    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + this.cid + '&redirect_uri=' + this.redirectUrl
+  }
+  getAccessToken (code) {
     return request.post('https://accounts.google.com/o/oauth2/token')
       .form({
-        client_id: cid,
-        client_secret: cs,
+        client_id: this.cid,
+        client_secret: this.cs,
         code: code,
         grant_type: 'authorization_code',
-        redirect_uri: 'urn:ietf:wg:oauth:2.0:oob'
+        redirect_uri: this.redirectUrl
       })
   }
   insertItem (token, fileBin) {
@@ -45,10 +48,10 @@ module.exports = class ChromeWebStore {
       }
     })
   }
-  getRefreshToken (refreshToken, cid, cs) {
+  getRefreshToken (refreshToken) {
     return request.post('https://www.googleapis.com/oauth2/v3/token', {form: {
-      client_id: cid,
-      client_secret: cs,
+      client_id: this.cid,
+      client_secret: this.cs,
       grant_type: 'refresh_token',
       refresh_token: refreshToken
     }})
