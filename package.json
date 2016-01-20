@@ -22,12 +22,12 @@
   },
   "homepage": "https://github.com/pastak/chrome-webstore-manager",
   "dependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
     "commander": "^2.8.1",
     "request-promise": "^0.4.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.4.5",
-    "babel-preset-es2015": "^6.3.13",
     "standard": "^5.2.1"
   }
 }
