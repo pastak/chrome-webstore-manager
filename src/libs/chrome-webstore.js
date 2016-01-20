@@ -1,7 +1,8 @@
 const request = require('request-promise')
 module.exports = class ChromeWebStore {
-  getCodeUrl (cid) {
-    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + cid + '&redirect_uri=urn:ietf:wg:oauth:2.0:oob'
+  getCodeUrl (cid, redirectUrl) {
+    redirectUrl = redirectUrl || 'urn:ietf:wg:oauth:2.0:oob'
+    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + cid + '&redirect_uri=' + redirectUrl
   }
   getAccessToken (cid, cs, code) {
     if (!(cid && cs && code)) reject(new Error('You should set 3 parameters'))
