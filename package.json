@@ -1,12 +1,12 @@
 {
   "name": "chrome-webstore-manager",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Command Line Tool for Publish Chrome WebStore",
   "main": "./dist/chrome-webstore.js",
   "scripts": {
     "test": "standard ./**/*js",
     "build": "babel src -d dist",
-    "prepublish": "npm run build"
+    "preinstall": "npm run build"
   },
   "bin": {
     "chrome-webstore-manager": "./dist/index.js"
