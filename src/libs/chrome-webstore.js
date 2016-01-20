@@ -5,17 +5,17 @@ module.exports = class ChromeWebStore {
     this.cs = cs
     this.redirectUrl = redirectUrl || 'urn:ietf:wg:oauth:2.0:oob'
   }
-  getCodeUrl () {
-    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + this.cid + '&redirect_uri=' + this.redirectUrl
+  getCodeUrl (redirectUrl) {
+    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + this.cid + '&redirect_uri=' + (redirectUrl || this.redirectUrl)
   }
-  getAccessToken (code) {
+  getAccessToken (code, redirectUrl) {
     return request.post('https://accounts.google.com/o/oauth2/token')
       .form({
         client_id: this.cid,
         client_secret: this.cs,
         code: code,
         grant_type: 'authorization_code',
-        redirect_uri: this.redirectUrl
+        redirect_uri: redirectUrl || this.redirectUrl
       })
   }
   insertItem (token, fileBin) {
