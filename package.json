@@ -1,13 +1,15 @@
 {
   "name": "chrome-webstore-manager",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Command Line Tool for Publish Chrome WebStore",
-  "main": "index.js",
+  "main": "./dist/chrome-webstore.js",
   "scripts": {
-    "test": "standard ./**/*js"
+    "test": "standard ./**/*js",
+    "build": "babel src -d dist",
+    "prepublish": "npm run build"
   },
   "bin": {
-    "chrome-webstore-manager": "./index.js"
+    "chrome-webstore-manager": "./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,8 @@
     "request-promise": "^0.4.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
     "standard": "^5.2.1"
   }
 }

@@ -4,18 +4,12 @@ var readline = require('readline')
 var child_process = require('child_process')
 var fs = require('fs')
 var program = require('commander')
-var request = require('request-promise')
 var getToken = require('./libs/getToken')
+var ChromeWebstore = require('./libs/chrome-webstore.js')
+const chromeWebstore = new ChromeWebstore()
 
 var getAccessToken = function (cid, cs, code) {
-  request.post('https://accounts.google.com/o/oauth2/token')
-    .form({
-      client_id: cid,
-      client_secret: cs,
-      code: code,
-      grant_type: 'authorization_code',
-      redirect_uri: 'urn:ietf:wg:oauth:2.0:oob'
-    })
+  chromeWebstore.getAccessToken(cid, cs, code)
     .then(function (data) {
       var json = JSON.parse(data)
       console.log('Your token: ' + json.access_token)
@@ -44,7 +38,7 @@ program
     if (options.code) {
       return getAccessToken(cid, cs, options.code)
     }
-    const getCodeUrl = 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + cid + '&redirect_uri=urn:ietf:wg:oauth:2.0:oob'
+    const getCodeUrl = chromeWebstore.getCodeUrl(cid)
     child_process.exec('open "' + getCodeUrl + '"')
     rli.setPrompt('Your CODE: ')
     rli.on('line', function (code) {
@@ -60,14 +54,7 @@ program
   .action(function (zipFile, options) {
     var token = getToken(options)
     var fileBin = fs.readFileSync(zipFile)
-    request.post({
-      uri: 'https://www.googleapis.com/upload/chromewebstore/v1.1/items',
-      headers: {
-        Authorization: 'Bearer ' + token,
-        'x-goog-api-version': 2
-      },
-      body: fileBin
-    }).then(function (data) {
+    chromeWebstore.insertItem(token, fileBin).then(function (data) {
       var json = JSON.parse(data)
       if (json.itemError) {
         console.error(json.itemError)
@@ -84,15 +71,7 @@ program
   .action(function (itemId, zipFile, options) {
     var fileBin = fs.readFileSync(zipFile)
     var token = getToken(options)
-    request({
-      method: 'PUT',
-      uri: 'https://www.googleapis.com/upload/chromewebstore/v1.1/items/' + itemId,
-      headers: {
-        Authorization: 'Bearer ' + token,
-        'x-goog-api-version': 2
-      },
-      body: fileBin
-    }).then(function (data) {
+    chromeWebstore.updateItem(token, fileBin, itemId).then(function (data) {
       var json = JSON.parse(data)
       if (json.itemError) {
         console.error(json.itemError)
@@ -110,13 +89,7 @@ program
   .action(function (itemId, options) {
     var token = getToken(options)
     var target = options.target || 'default'
-    request.post({
-      uri: 'https://www.googleapis.com//chromewebstore/v1.1/items/' + itemId + '/publish?publishTarget=' + target,
-      headers: {
-        Authorization: 'Bearer ' + token,
-        'x-goog-api-version': 2
-      }
-    }).then(function (data) {
+    chromeWebstore.publishItem(token, itemId, target).then(function (data) {
       var json = JSON.parse(data)
       if (json.itemError) {
         console.error(json.itemError)
@@ -143,12 +116,7 @@ program
       process.exit()
     }
     var refreshToken = options.refresh_token || process.env.WEBSTORE_REFRESH_TOKEN
-    request.post('https://www.googleapis.com/oauth2/v3/token', {form: {
-      client_id: cid,
-      client_secret: cs,
-      grant_type: 'refresh_token',
-      refresh_token: refreshToken
-    }}).then(function (data) {
+    chromeWebstore.getRefreshToken(refreshToken, cid, cs).then(function (data) {
       var json = JSON.parse(data)
       console.log(json.access_token)
     })
