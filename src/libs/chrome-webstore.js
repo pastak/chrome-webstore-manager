@@ -5,8 +5,10 @@ module.exports = class ChromeWebStore {
     this.cs = cs
     this.redirectUrl = redirectUrl || 'urn:ietf:wg:oauth:2.0:oob'
   }
-  getCodeUrl (redirectUrl) {
-    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + this.cid + '&redirect_uri=' + (redirectUrl || this.redirectUrl)
+  getCodeUrl (redirectUrl, state) {
+    state = state || ''
+    state = encodeURIComponent(state)
+    return 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=' + this.cid + '&state' + state + '&redirect_uri=' + (redirectUrl || this.redirectUrl)
   }
   getAccessToken (code, redirectUrl) {
     return request.post('https://accounts.google.com/o/oauth2/token')
