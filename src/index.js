@@ -19,7 +19,7 @@ var getAccessToken = function (cid, cs, code) {
 }
 
 program
-  .version(require('./package.json').version)
+  .version(require('../package.json').version)
 
 program
   .command('token')
