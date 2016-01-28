@@ -1,6 +1,6 @@
 {
   "name": "chrome-webstore-manager",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "Command Line Tool for Publish Chrome WebStore",
   "main": "./dist/libs/chrome-webstore.js",
   "scripts": {
