@@ -38,7 +38,8 @@ module.exports = class ChromeWebStore {
         Authorization: 'Bearer ' + token,
         'x-goog-api-version': 2
       },
-      body: fileBin
+      body: fileBin,
+      timeout: 120 * 1000
     })
   }
   publishItem (token, itemId, target = 'default') {
