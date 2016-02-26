@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var readline = require('readline')
-var child_process = require('child_process')
+var open = require("open");
 var fs = require('fs')
 var program = require('commander')
 var getToken = require('./libs/getToken')
@@ -40,7 +40,7 @@ program
     }
     const chromeWebstore = new ChromeWebstore(cid, cs)
     const getCodeUrl = chromeWebstore.getCodeUrl()
-    child_process.exec('open "' + getCodeUrl + '"')
+    open(getCodeUrl);
     rli.setPrompt('Your CODE: ')
     rli.on('line', function (code) {
       getAccessToken(cid, cs, code)
