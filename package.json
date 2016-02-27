@@ -23,6 +23,7 @@
   "homepage": "https://github.com/pastak/chrome-webstore-manager",
   "dependencies": {
     "commander": "^2.8.1",
+    "open": "0.0.5",
     "request-promise": "^0.4.3"
   },
   "devDependencies": {
