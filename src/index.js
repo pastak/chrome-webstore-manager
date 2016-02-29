@@ -104,7 +104,7 @@ program
   })
 program
   .command('refresh_token')
-  .description('Get token for the first time')
+  .description('Get token by refresh_token')
   .option('--client_id [Client_ID]', 'Your Client ID')
   .option('--client_secret [Client_Secret]', 'Your Client Secret')
   .option('--refresh_token [Refresh_Token]', 'Your Refresh Token')
