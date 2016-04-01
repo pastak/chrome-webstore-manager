@@ -30,9 +30,9 @@ module.exports = class ChromeWebStore {
       body: fileBin
     })
   }
-  getItem (token, itemId, projection = "DRAFT") {
+  getItem (token, itemId, projection = 'DRAFT') {
     return request.get({
-      uri: 'https://www.googleapis.com//chromewebstore/v1.1/items/'+ itemId + "?projection="+projection,
+      uri: 'https://www.googleapis.com//chromewebstore/v1.1/items/'+ itemId + '?projection=' + projection,
       headers: {
         Authorization: 'Bearer ' + token,
         'x-goog-api-version': 2
