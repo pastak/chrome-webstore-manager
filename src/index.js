@@ -87,11 +87,11 @@ program
 
 program
   .command('get [itemId]')
-  .description('make item publish')
+  .description('get item from chrome webstore')
   .option('-t, --token [YOUR_TOKEN]', 'Your token')
   .option('--projection [PROJECTION_TYPE]', '"DRAFT" or "PUBLISHED"')
   .action(function (itemId, options) {
-    var token = getToken(options)
+    const token = getToken(options)
     var projection = options.projection || 'DRAFT'
     const chromeWebstore = new ChromeWebstore()
     chromeWebstore.getItem(token, itemId, projection).then(function (data) {
