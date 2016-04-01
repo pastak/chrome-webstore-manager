@@ -30,6 +30,15 @@ module.exports = class ChromeWebStore {
       body: fileBin
     })
   }
+  getItem (token, itemId, projection = "DRAFT") {
+    return request.get({
+      uri: 'https://www.googleapis.com//chromewebstore/v1.1/items/'+ itemId + "?projection="+projection,
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'x-goog-api-version': 2
+      }
+    })
+  }
   updateItem (token, fileBin, itemId) {
     return request({
       method: 'PUT',
