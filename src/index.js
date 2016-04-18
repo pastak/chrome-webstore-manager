@@ -84,6 +84,26 @@ program
     })
   })
 
+
+program
+  .command('get [itemId]')
+  .description('get item from chrome webstore')
+  .option('-t, --token [YOUR_TOKEN]', 'Your token')
+  .option('--projection [PROJECTION_TYPE]', '"DRAFT" or "PUBLISHED"')
+  .action(function (itemId, options) {
+    const token = getToken(options)
+    var projection = options.projection || 'DRAFT'
+    const chromeWebstore = new ChromeWebstore()
+    chromeWebstore.getItem(token, itemId, projection).then(function (data) {
+      var json = JSON.parse(data)
+      if (json.itemError) {
+        console.error(json.itemError)
+        return process.exit(1)
+      }
+      console.log(json.id)
+    })
+  })
+
 program
   .command('publish [itemId]')
   .description('make item publish')
