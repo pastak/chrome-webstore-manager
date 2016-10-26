@@ -33,7 +33,7 @@ program
     const cs = options.client_secret
     if (!(cid && cs)) {
       console.error('Require Client ID and Client Secret')
-      process.exit()
+      process.exit(1)
     }
     if (options.code) {
       return getAccessToken(cid, cs, options.code)
@@ -133,11 +133,11 @@ program
     const cs = options.client_secret
     if (!(cid && cs)) {
       console.error('Require Client ID and Client Secret')
-      process.exit()
+      process.exit(1)
     }
     if (!(process.env.WEBSTORE_REFRESH_TOKEN || options.refresh_token)) {
       console.error('Require refresh_token')
-      process.exit()
+      process.exit(1)
     }
     var refreshToken = options.refresh_token || process.env.WEBSTORE_REFRESH_TOKEN
     const chromeWebstore = new ChromeWebstore(cid, cs)

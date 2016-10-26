@@ -9,5 +9,5 @@ module.exports = function (options) {
     return process.env.WEBSTORE_TOKEN
   }
   console.error("Require Chrome Webstore API access_token. Please set into `--token` or ENV['WEBSTORE_TOKEN']")
-  process.exit()
+  process.exit(1)
 }
