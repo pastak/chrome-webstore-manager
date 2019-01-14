@@ -32,7 +32,7 @@ module.exports = class ChromeWebStore {
   }
   getItem (token, itemId, projection = 'DRAFT') {
     return request.get({
-      uri: 'https://www.googleapis.com//chromewebstore/v1.1/items/'+ itemId + '?projection=' + projection,
+      uri: 'https://www.googleapis.com//chromewebstore/v1.1/items/' + itemId + '?projection=' + projection,
       headers: {
         Authorization: 'Bearer ' + token,
         'x-goog-api-version': 2
@@ -61,11 +61,11 @@ module.exports = class ChromeWebStore {
     })
   }
   getRefreshToken (refreshToken) {
-    return request.post('https://www.googleapis.com/oauth2/v3/token', {form: {
+    return request.post('https://www.googleapis.com/oauth2/v3/token', { form: {
       client_id: this.cid,
       client_secret: this.cs,
       grant_type: 'refresh_token',
       refresh_token: refreshToken
-    }})
+    } })
   }
 }

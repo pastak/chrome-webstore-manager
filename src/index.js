@@ -3,7 +3,7 @@
 var readline = require('readline')
 var fs = require('fs')
 var program = require('commander')
-var open = require("open")
+var open = require('opn')
 var getToken = require('./libs/getToken')
 var ChromeWebstore = require('./libs/chrome-webstore.js')
 
@@ -83,7 +83,6 @@ program
       console.log(json.id)
     })
   })
-
 
 program
   .command('get [itemId]')
