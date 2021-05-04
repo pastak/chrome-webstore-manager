@@ -4,7 +4,7 @@
   "description": "Command Line Tool for Publish Chrome WebStore",
   "main": "./dist/libs/chrome-webstore.js",
   "scripts": {
-    "test": "standard ./**/*js",
+    "test": "standard ./src/**/*js",
     "build": "babel src -d dist",
     "prepublish": "npm run build"
   },
@@ -30,6 +30,6 @@
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.1",
-    "standard": "^12.0.1"
+    "standard": "^16.0.3"
   }
 }
