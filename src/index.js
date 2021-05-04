@@ -3,7 +3,7 @@
 var readline = require('readline')
 var fs = require('fs')
 var program = require('commander')
-var open = require('opn')
+var open = require('open')
 var getToken = require('./libs/getToken')
 var ChromeWebstore = require('./libs/chrome-webstore.js')
 
