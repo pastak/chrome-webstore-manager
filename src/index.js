@@ -10,8 +10,7 @@ var ChromeWebstore = require('./libs/chrome-webstore.js')
 var getAccessToken = function (cid, cs, code) {
   const chromeWebstore = new ChromeWebstore(cid, cs)
   chromeWebstore.getAccessToken(code)
-    .then(function (data) {
-      var json = JSON.parse(data)
+    .then(function (json) {
       console.log('Your token: ' + json.access_token)
       console.log('Your refresh_token: ' + json.refresh_token)
       process.exit()
@@ -56,8 +55,7 @@ program
     var token = getToken(options)
     var fileBin = fs.readFileSync(zipFile)
     const chromeWebstore = new ChromeWebstore()
-    chromeWebstore.insertItem(token, fileBin).then(function (data) {
-      var json = JSON.parse(data)
+    chromeWebstore.insertItem(token, fileBin).then(function (json) {
       if (json.itemError) {
         console.error(json.itemError)
         return process.exit(1)
@@ -74,8 +72,7 @@ program
     var fileBin = fs.readFileSync(zipFile)
     var token = getToken(options)
     const chromeWebstore = new ChromeWebstore()
-    chromeWebstore.updateItem(token, fileBin, itemId).then(function (data) {
-      var json = JSON.parse(data)
+    chromeWebstore.updateItem(token, fileBin, itemId).then(function (json) {
       if (json.itemError) {
         console.error(json.itemError)
         return process.exit(1)
@@ -93,8 +90,7 @@ program
     const token = getToken(options)
     var projection = options.projection || 'DRAFT'
     const chromeWebstore = new ChromeWebstore()
-    chromeWebstore.getItem(token, itemId, projection).then(function (data) {
-      var json = JSON.parse(data)
+    chromeWebstore.getItem(token, itemId, projection).then(function (json) {
       if (json.itemError) {
         console.error(json.itemError)
         return process.exit(1)
@@ -112,8 +108,7 @@ program
     var token = getToken(options)
     var target = options.target || 'default'
     const chromeWebstore = new ChromeWebstore()
-    chromeWebstore.publishItem(token, itemId, target).then(function (data) {
-      var json = JSON.parse(data)
+    chromeWebstore.publishItem(token, itemId, target).then(function (json) {
       if (json.itemError) {
         console.error(json.itemError)
         return process.exit(1)
@@ -140,8 +135,7 @@ program
     }
     var refreshToken = options.refresh_token || process.env.WEBSTORE_REFRESH_TOKEN
     const chromeWebstore = new ChromeWebstore(cid, cs)
-    chromeWebstore.getRefreshToken(refreshToken).then(function (data) {
-      var json = JSON.parse(data)
+    chromeWebstore.getRefreshToken(refreshToken).then(function (json) {
       console.log(json.access_token)
     })
   })
